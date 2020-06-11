@@ -16,8 +16,8 @@ router.get("/", (req, res) => {
       });
     });
 });
-//router.use("./:id", validatePostId)
-router.get("/:id", (req, res) => {
+
+router.get("/:id", validatePostId, (req, res) => {
   // do your magic!
   db.getById(req.params.id)
     .then((post) => res.status(200).json(post))
@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
     );
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", validatePostId, (req, res) => {
   // do your magic!
   db.remove(req.params.id)
     .then((count) => {
@@ -46,7 +46,7 @@ router.delete("/:id", (req, res) => {
       });
     });
 });
-router.put("/:id", (req, res) => {
+router.put("/:id", validatePostId, (req, res) => {
   // do your magic!
   db.update(req.params.id, req.body)
     .then((count) => {
